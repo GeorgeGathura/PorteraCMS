@@ -730,75 +730,7 @@ get_header();
                                     Are you interested in a course? Please fill out the form below, and we will get back to you as soon as possible.
                                 </p>
                             </div>
-                            <form
-                                action="assets/mail/contact.php"
-                                method="POST"
-                                class="contact-form"
-                            >
-                                <div class="col-lg-12">
-                                    <div class="row">
-                                        <div class="form-group">
-                                            <input
-                                                class="form-control"
-                                                id="name"
-                                                name="name"
-                                                placeholder="Name"
-                                                type="text"
-                                            />
-                                            <span class="alert-error"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12">
-                                    <div class="row">
-                                        <div class="form-group">
-                                            <input
-                                                class="form-control"
-                                                id="email"
-                                                name="email"
-                                                placeholder="Email*"
-                                                type="email"
-                                            />
-                                            <span class="alert-error"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12">
-                                    <div class="row">
-                                        <div class="form-group">
-                                            <input
-                                                class="form-control"
-                                                id="phone"
-                                                name="phone"
-                                                placeholder="Phone"
-                                                type="text"
-                                            />
-                                            <span class="alert-error"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12">
-                                    <div class="row">
-                                        <div class="form-group comments">
-                    <textarea
-                        class="form-control"
-                        id="comments"
-                        name="comments"
-                        placeholder="Tell Me About Courses *"
-                    ></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12">
-                                    <button type="submit" name="submit" id="submit">
-                                        Send Message <i class="fa fa-paper-plane"></i>
-                                    </button>
-                                </div>
-                                <!-- Alert Message -->
-                                <div class="col-lg-12 alert-notification">
-                                    <div id="message" class="alert-msg"></div>
-                                </div>
-                            </form>
+                            <?php echo do_shortcode('[contact-form-7 id="6d9a055" title="Course Form"]'); ?>
                         </div>
                         <!-- End Contact Info -->
                     </div>

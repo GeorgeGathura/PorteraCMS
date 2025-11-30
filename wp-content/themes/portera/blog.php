@@ -1,4 +1,8 @@
 <?php
+/**
+ * 
+ * Template Name: Blog
+ */
 get_header();
 global $post;
 $featuredImage = get_the_post_thumbnail_url($post->ID);
@@ -45,10 +49,13 @@ $featuredImage = get_the_post_thumbnail_url($post->ID);
                                         <div class="thumb">
                                             <a href="<?php echo get_permalink($featured->ID); ?>"
                                             >
-                                                <img src="<?php get_the_post_thumbnail_url($featured->ID); ?>" alt="Thumb"
+                                                <img src="<?php echo get_the_post_thumbnail_url($featured->ID); ?>" alt="Thumb"
                                                 /></a>
                                             <div class="date">
-                                                <h4><span>24</span> Nov, 2025</h4>
+                                                <h4>
+                                                    <span><?php echo get_the_date('d'); ?></span>
+                                                    <?php echo get_the_date('M, Y'); ?>
+                                                </h4>
                                             </div>
                                         </div>
                                         <div class="info">
