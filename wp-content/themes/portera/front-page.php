@@ -20,7 +20,7 @@ get_header();
                 <div class="carousel-item active">
                     <div
                         class="slider-thumb bg-fixed"
-                        style="background-image: url(assets/img/banner/movers1.webp)"
+                        style="background-image: url( <?php echo get_theme_file_uri('assets/img/banner/movers1.webp'); ?>"
                     ></div>
                     <div class="box-table shadow dark">
                         <div class="box-cell">
