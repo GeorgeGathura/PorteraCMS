@@ -1,6 +1,8 @@
 <?php
 
 get_header();
+global $post;
+$homepageId = $post->ID;
 ?>
 
     <!-- Start Banner
@@ -17,151 +19,80 @@ get_header();
         >
             <!-- Wrapper for slides -->
             <div class="carousel-inner text-light carousel-zoom">
-                <div class="carousel-item active">
-                    <div
-                        class="slider-thumb bg-fixed"
-                        style="background-image: url( <?php echo get_theme_file_uri('assets/img/banner/movers1.webp'); ?>"
-                    ></div>
-                    <div class="box-table shadow dark">
-                        <div class="box-cell">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-lg-7">
-                                        <div class="content">
-                                            <h3 data-animation="animated slideInLeft">
-                                                Learn the art and science of moving
-                                            </h3>
-                                            <h1 data-animation="animated slideInUp">
-                                                Portera, Africa’s first Movers Training Academy powered by
-                                                Nellions.
-                                            </h1>
-                                            <a
-                                                data-animation="animated slideInUp"
-                                                class="btn btn-light border btn-md"
-                                                href="#"
-                                            >Learn more</a
-                                            >
-                                            <a
-                                                data-animation="animated slideInUp"
-                                                class="btn btn-dark effect btn-md"
-                                                href="#"
-                                            >View Courses</a
-                                            >
+              
+                <?php
+                // Check rows exists.
+                if( have_rows('carousel') ):
+                    $i=0;
+                    // Loop through rows.
+                    while( have_rows('carousel') ) : the_row();
+
+                        // Load sub field value.
+                        $topTitle = get_sub_field('top_title');
+                        $title = get_sub_field('title');
+                        $learnMore = get_sub_field('learn_more');
+                        $carouselLink = get_sub_field('carousel_link');
+
+                        // Do something, but make sure you escape the value if outputting directly...
+                ?>
+                        <div class="carousel-item <?php echo esc_attr( $i==0 ? 'active' : '' ); ?>">
+                            <div
+                                    class="slider-thumb bg-fixed"
+                                    style="background-image: url(<?php echo esc_url( get_sub_field('carousel_item') ); ?>)"
+                            ></div>
+                            <div class="box-table shadow dark">
+                                <div class="box-cell">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-lg-7">
+                                                <div class="content">
+                                                    <h3 data-animation="animated slideInLeft">
+                                                        <?php echo esc_html( $topTitle ); ?>
+                                                    </h3>
+                                                    <h1 data-animation="animated slideInUp">
+                                                       <?php echo esc_html( $title ); ?> 
+                                                    </h1>
+                                              
+                                                    <?php
+                                                    if( $learnMore ):
+                                                        $link_url = $learnMore['url'];
+                                                        $link_title = $learnMore['title'];
+                                                        $link_target = $learnMore['target'] ? $learnMore['target'] : '_self';
+                                                        ?>
+                                                        <a  data-animation="animated slideInUp"
+                                                            class="btn btn-light border btn-md"
+                                                                href="<?php echo esc_url( $link_url ); ?>" target="<?php echo esc_attr( $link_target ); ?>"><?php echo esc_html( $link_title ); ?></a>
+                                                    <?php 
+                                                     endif; 
+                                                 
+                                                    if( $carouselLink ):
+                                                        $link_url = $carouselLink['url'];
+                                                        $link_title = $carouselLink['title'];
+                                                        $link_target = $carouselLink['target'] ? $carouselLink['target'] : '_self';
+                                                        ?>
+                                                        <a   data-animation="animated slideInUp"
+                                                             class="btn btn-dark effect btn-md" href="<?php echo esc_url( $link_url ); ?>" target="<?php echo esc_attr( $link_target ); ?>"><?php echo esc_html( $link_title ); ?></a>
+                                                    <?php
+                                                    endif;
+                                                    ?>
+
+
+
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div
-                        class="slider-thumb bg-fixed"
-                        style="background-image: url(assets/img/banner/movers2.webp)"
-                    ></div>
-                    <div class="box-table shadow dark">
-                        <div class="box-cell">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-lg-7">
-                                        <div class="content">
-                                            <h3 data-animation="animated slideInLeft">
-                                                We're glad to see you
-                                            </h3>
-                                            <h1 data-animation="animated slideInUp">
-                                                Join the Next Generation of Professional Movers
-                                            </h1>
-                                            <a
-                                                data-animation="animated slideInUp"
-                                                class="btn btn-light border btn-md"
-                                                href="#"
-                                            >Learn more</a
-                                            >
-                                            <a
-                                                data-animation="animated slideInUp"
-                                                class="btn btn-dark effect btn-md"
-                                                href="#"
-                                            >View Courses</a
-                                            >
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div
-                        class="slider-thumb bg-fixed"
-                        style="background-image: url(assets/img/banner/movers3.webp)"
-                    ></div>
-                    <div class="box-table shadow dark">
-                        <div class="box-cell">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-lg-7">
-                                        <div class="content">
-                                            <h3 data-animation="animated slideInLeft">
-                                                Start Your Training
-                                            </h3>
-                                            <h1 data-animation="animated slideInUp">
-                                                From packing and lifting to logistics and client service
-                                            </h1>
-                                            <a
-                                                data-animation="animated slideInUp"
-                                                class="btn btn-light border btn-md"
-                                                href="#"
-                                            >Learn more</a
-                                            >
-                                            <a
-                                                data-animation="animated slideInUp"
-                                                class="btn btn-dark effect btn-md"
-                                                href="#"
-                                            >View Courses</a
-                                            >
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div
-                        class="slider-thumb bg-fixed"
-                        style="background-image: url(assets/img/welcome-banner.webp)"
-                    ></div>
-                    <div class="box-table shadow dark">
-                        <div class="box-cell">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-lg-7">
-                                        <div class="content">
-                                            <h3 data-animation="animated slideInLeft">
-                                                Next Intake begins:
-                                            </h3>
-                                            <h1 data-animation="animated slideInUp">
-                                                5th January 2026
-                                            </h1>
-                                            <a
-                                                data-animation="animated slideInUp"
-                                                class="btn btn-light border btn-md"
-                                                href="#"
-                                            >Learn more</a
-                                            >
-                                            <a
-                                                data-animation="animated slideInUp"
-                                                class="btn btn-dark effect btn-md"
-                                                href="#"
-                                            >View Courses</a
-                                            >
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                        </div>    
+                <?php
+                    $i+=1;
+                        // End loop.
+                    endwhile;
+
+                endif;
+                ?>
+             
             </div>
             <!-- End Wrapper for slides -->
 
@@ -198,40 +129,8 @@ get_header();
             <div class="row">
                 <div class="col-lg-8 our-feature-items">
                     <div class="less-bar info">
-                        <h5>Introduction</h5>
-                        <h2>Portera Mobility Training Institute</h2>
-                        <p>
-                            Portera Mobility Training Institute (PMTI) is shaping the next
-                            generation of skilled movers; professionals who approach relocation
-                            as craftsmanship.
-                        </p>
-
-                        <p>
-                            Born from the vision and experience of Nellions Moving &
-                            Relocations, PMTI was founded to professionalize an industry that
-                            has long relied on untrained hands and untapped potential. Our
-                            mission is clear: to build skill, discipline, and pride in the art
-                            of moving; and to open real career paths for Kenya’s young
-                            workforce.
-                        </p>
-
-                        <p>
-                            Every relocation tells a story - of new beginnings, fresh
-                            opportunities, and human connection. Behind each of those stories
-                            are movers who handle lives in motion. PMTI exists to prepare them
-                            for that responsibility through a blend of practical training,
-                            safety awareness, and professional ethics that meet global
-                            standards.
-                        </p>
-
-                        <p>
-                            Our approach is simple: we don’t just teach how to move things — we
-                            teach how to move with purpose. Graduates leave PMTI not only
-                            certified, but transformed; ready to deliver excellence, uphold
-                            integrity, and represent a new face of professionalism in Kenya’s
-                            mobility and logistics industry.
-                        </p>
-                        <a href="/about-us.php" class="btn btn-dark border btn-md"
+                      <?php the_content(); ?>
+                        <a href="<?php echo get_permalink(36); ?>" class="btn btn-dark border btn-md"
                         >Read More</a
                         >
                     </div>
@@ -290,34 +189,29 @@ get_header();
                     <div class="sidebar-item latest-posts trending-courses-box">
                         <h4>Latest News</h4>
                         <div class="trending-courses-items">
+                        <?php
+                        
+                        $args = array('post_type' => 'post', 'posts_per_page' => 4);
+                        $featured = new WP_Query($args);
+                        if ( $featured->have_posts() ) :
+                        
+                            while ( $featured->have_posts() ) : $featured->the_post();
+                               
+                        ?>
                             <div class="item">
                                 <h4>
-                                    <a href="#">The Rise of Professional Movers in Kenya</a>
+                                    <a href="#"><?php echo get_the_title(); ?></a>
                                 </h4>
                                 <div class="meta">
-                                    <i class="fas fa-user"></i> By <a href="#">Sam Mwaura</a>
-                                    <span><i class="fas fa-clock"></i> 12 Dec, 2025</span>
+                                    <i class="fas fa-user"></i> By <a href="#"><?php echo get_the_author_meta('display_name'); ?></a>
+                                    <span><i class="fas fa-clock"></i>  <?php echo get_the_date('dS M Y'); ?></span>
                                 </div>
                             </div>
-                            <div class="item">
-                                <h4>
-                                    <a href="#">Why Skills Training Matters: Building Dignity and Opportunity in Hands-On Careers</a>
-                                </h4>
-                                <div class="meta">
-                                    <i class="fas fa-user"></i> By <a href="#"> Sam Mwaura</a>
-                                    <span><i class="fas fa-clock"></i> 25 Nov, 2025</span>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <h4>
-                                    <a href="#">Inside the World of Moving: What It Takes to Be a Certified Professional Mover</a>
-                                </h4>
-                                <div class="meta">
-                                    <i class="fas fa-user"></i> By <a href="#"> Sam Mwaura</a>
-                                    <span><i class="fas fa-clock"></i> 13 Jan, 2025</span>
-                                </div>
-                            </div>
-                            <a href="#" class="more"
+                        <?php
+                            endwhile;
+                        endif;
+                        ?>
+                            <a href="<?php echo get_permalink(32); ?>" class="more"
                             >Browse All News <i class="fas fa-angle-double-right"></i
                                 ></a>
                         </div>
@@ -328,42 +222,7 @@ get_header();
                     <div class="sidebar-item online-registration">
                         <h4>Online Registration</h4>
                         <div class="reg-form">
-                            <form action="#">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <input
-                                                class="form-control"
-                                                placeholder="Name*"
-                                                type="text"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <input
-                                                class="form-control"
-                                                placeholder="Email*"
-                                                type="email"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <input
-                                                class="form-control"
-                                                placeholder="Phone"
-                                                type="text"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <button class="btn btn-dark effect btn-sm" type="submit">
-                                            Register Now
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
+                           <?php echo do_shortcode('[contact-form-7 id="ea164d0" title="Online Registration"]'); ?>
                         </div>
                     </div>
                     <!-- End Online Registration -->
@@ -387,15 +246,24 @@ get_header();
                     <!-- Start Single Item -->
                     <div class="item">
                         <div class="row align-items-center">
+                            <?php
+                            
+                            $args = array('page_id' => 65, 'posts_per_page' => 1);
+                            $featured = new WP_Query($args);
+                            if ( $featured->have_posts() ) :
+                            
+                                while ( $featured->have_posts() ) : $featured->the_post();
+                                    $featuredImage = get_the_post_thumbnail_url(get_the_ID(), 'medium');
+                            ?>
                             <div class="col-lg-5">
                                 <div class="thumb">
-                                    <img src="assets/img/courses/img2.webp" alt="Thumb" />
+                                    <img src="<?php echo $featuredImage; ?>" alt="Thumb" />
 
                                 </div>
                             </div>
                             <div class="col-lg-7 info">
                                 <h2>
-                                    <a href="course-details.php"> Movers Course</a>
+                                    <a href="<?php echo get_permalink($post->ID); ?>"> Movers Course</a>
                                 </h2>
                                 <h4>Core curriculum</h4>
                                 <p>
@@ -460,7 +328,7 @@ get_header();
                                 </p>
 
                                 <a
-                                    href="course-details.php"
+                                    href="<?php echo get_permalink($post->ID); ?>"
                                     class="btn btn-dark effect btn-sm"
                                     data-animation="animated slideInUp"
                                 >Read More</a
@@ -482,6 +350,11 @@ get_header();
                                     </div>
                                 </div>
                             </div>
+    
+                            <?php
+                                endwhile;
+                            endif;
+                            ?>
                         </div>
                     </div>
                     <!-- End Single Item -->
@@ -555,101 +428,35 @@ get_header();
                     <div
                         class="advisor-items advisor-carousel-solid owl-carousel owl-theme text-center text-light"
                     >
+                        <?php
+                        
+                        $args = array('post_type' => 'trainers', 'posts_per_page' => 4);
+                        $featured = new WP_Query($args);
+                        if ( $featured->have_posts() ) :
+                        
+                            while ( $featured->have_posts() ) : $featured->the_post();
+                                $featuredImage = get_the_post_thumbnail_url(get_the_ID(), 'full');
+                                ?>
                         <!-- Single Item -->
                         <div class="advisor-item">
                             <div class="info-box">
-                                <img src="assets/img/advisor/1.webp" alt="Thumb" />
+                                <img src="<?php echo $featuredImage; ?>" alt="Thumb" />
                                 <div class="info-title">
-                                    <h4>Joseph Ndung’u</h4>
-                                    <span>Documentation & Records Management</span>
+                                    <?php the_title('<h4>','</h4>'); ?>
+                                    <span><?php echo get_field('role'); ?></span>
                                     <div class="social">
-                                        <p>Mr. Ndungu teaches students how to prepare, manage, and maintain moving and relocation documents. The sessions focus on inventory management, labeling, customs forms, and the importance of accuracy and traceability in professional moving operations.</p>
+                                       
+                                            <?php the_content(); ?>
+                                        
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- Single Item -->
-                        <!-- Single Item -->
-                        <div class="advisor-item">
-                            <div class="info-box">
-                                <img src="assets/img/advisor/3.webp" alt="Thumb" />
-                                <div class="info-title">
-                                    <h4>Cecilia Karanja</h4>
-                                    <span>Packing & Handling Techniques</span>
-                                    <div class="social">
-                                        <p>
-                                            Mrs. Karanja's course covers professional packing standards, material selection, and handling of delicate, high-value items. She trains students on wrapping methods, packing for export and local moves, and load arrangement for safety and efficiency.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Single Item -->
-                        <!-- Single Item -->
-                        <div class="advisor-item">
-                            <div class="info-box">
-                                <img src="assets/img/advisor/2.webp" alt="Thumb" />
-                                <div class="info-title">
-                                    <h4>Elizabeth Nabiswa</h4>
-                                    <span>Client Communication & Service Etiquette</span>
-                                    <div class="social">
-                                        <p>
-                                            Mrs. Nabiswa's course focuses on building interpersonal and customer service skills. Her module trains students on communication etiquette, conflict management, teamwork, and maintaining professionalism at every stage of client interaction.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Single Item -->
-                        <!-- Single Item -->
-                        <div class="advisor-item">
-                            <div class="info-box">
-                                <img src="assets/img/advisor/4.webp" alt="Thumb" />
-                                <div class="info-title">
-                                    <h4>Julius Kimani</h4>
-                                    <span>Housekeeping for Movers</span>
-                                    <div class="social">
-                                        <p>
-                                            Mr. Kimani's lessons emphasize designing, organizing, and maintaining neat, client-ready environments before and after move-ins. Students learn attention to detail, use of cleaning materials, and how to align with client expectations during setups.
-                                        </p>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <!-- Single Item -->
-                        <!-- Single Item -->
-                        <!-- <div class="advisor-item">
-                          <div class="info-box">
-                            <img src="assets/img/advisor/4.webp" alt="Thumb" />
-                            <div class="info-title">
-                              <h4>Charles Lumumba</h4>
-                              <span>Housekeeping for Movers</span>
-                              <div class="social">
-                               <p>
-                                Mr. Lumumba's lessons emphasize designing, organizing, and maintaining neat, client-ready environments before and after move-ins. Students learn attention to detail, use of cleaning materials, and how to align with client expectations during setups.
-                               </p>
-                              </div>
-                            </div>
-                          </div>
-                        </div> -->
-                        <!-- Single Item -->
-                        <!-- Single Item -->
-                        <div class="advisor-item">
-                            <div class="info-box">
-                                <img src="assets/img/advisor/5.webp" alt="Thumb" />
-                                <div class="info-title">
-                                    <h4>Sam Mwaura</h4>
-                                    <span>Safety in Moving & Introduction to Moving Industry</span>
-                                    <div class="social">
-                                        <p>
-                                            Mr. Mwaura introduces students to the fundamentals of the moving industry, safety protocols, and professional conduct. His sessions focus on lifting techniques, teamwork coordination, hazard awareness, and maintaining a safety-first culture on every job site.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Single Item -->
+    
+                        <?php
+                            endwhile; wp_reset_postdata();
+                        endif;
+                        ?>
                     </div>
                 </div>
             </div>
@@ -659,21 +466,33 @@ get_header();
 
     <!-- Start Fun Factor 
         ============================================= -->
+<?php
+    $statisticsHeading = get_field('statistics_heading',$homepageId);
+    $statistics1Label = get_field('statistics_1_label',$homepageId);
+    $statistics2Label = get_field('statistics_2_label',$homepageId);
+    $statistics3Label = get_field('statistics_3_label',$homepageId);
+    $statistics4Label = get_field('statistics_4_label',$homepageId);
+    
+    $statisticsCounter1 = get_field('statistics_1_counter',$homepageId);
+    $statisticsCounter2 = get_field('statistics_2_counter',$homepageId);
+    $statisticsCounter3 = get_field('statistics_3_counter',$homepageId);
+    $statisticsCounter4 = get_field('statistics_4_counter',$homepageId);
+?>
     <div
         class="fun-factor-area default-padding bottom-less text-center bg-fixed shadow dark-hard"
         style="background-image: url(assets/img/about/partnerships.webp)"
     >
         <div class="container">
             <div class="row">
-                <h3 class="text-white">Shaping the next generation of Movers</h3>
+                <h3 class="text-white"><?php echo $statisticsHeading; ?></h3>
                 <div class="col-lg-3 col-md-6 item">
                     <div class="fun-fact">
                         <div class="icon">
                             <i class="flaticon-contract"></i>
                         </div>
                         <div class="info">
-                            <span class="timer" data-to="12" data-speed="5000"></span>
-                            <span class="medium">Years In Logistics</span>
+                            <span class="timer" data-to="<?php echo $statisticsCounter1; ?>" data-speed="5000"></span>
+                            <span class="medium"><?php echo $statistics1Label; ?></span>
                         </div>
                     </div>
                 </div>
@@ -683,8 +502,8 @@ get_header();
                             <i class="flaticon-professor"></i>
                         </div>
                         <div class="info">
-                            <span class="timer" data-to="5" data-speed="5000"></span>
-                            <span class="medium">Experienced Teachers</span>
+                            <span class="timer" data-to="<?php echo $statisticsCounter2; ?>" data-speed="5000"></span>
+                            <span class="medium"><?php echo $statistics2Label; ?></span>
                         </div>
                     </div>
                 </div>
@@ -694,8 +513,8 @@ get_header();
                             <i class="flaticon-online"></i>
                         </div>
                         <div class="info">
-                            <span class="timer" data-to="500" data-speed="5000"></span>
-                            <span class="medium">Students Enrolled</span>
+                            <span class="timer" data-to="<?php echo $statisticsCounter3; ?>" data-speed="5000"></span>
+                            <span class="medium"><?php echo $statistics3Label; ?></span>
                         </div>
                     </div>
                 </div>
@@ -705,8 +524,8 @@ get_header();
                             <i class="flaticon-reading"></i>
                         </div>
                         <div class="info">
-                            <span class="timer" data-to="2" data-speed="5000"></span>
-                            <span class="medium">Courses</span>
+                            <span class="timer" data-to="<?php echo $statisticsCounter4; ?>" data-speed="5000"></span>
+                            <span class="medium"><?php echo $statistics4Label; ?></span>
                         </div>
                     </div>
                 </div>
@@ -891,136 +710,54 @@ get_header();
                     <div class="col-lg-8 offset-lg-2">
                         <h2>Latest News</h2>
                         <p>
-                            Able an hope of body. Any nay shyness article matters own removal
-                            nothing his forming. Gay own additions education satisfied the
-                            perpetual. If he cause manor happy. Without farther she exposed saw
-                            man led. Along on happy could cease green oh.
+                         <?php  echo get_the_excerpt(32); ?>
                         </p>
                     </div>
                 </div>
             </div>
             <div class="blog-items">
                 <div class="row">
-                    <!-- Single Item -->
-                    <div class="col-lg-4 single-item">
+                    <?php
+                    
+                    $args = array('post_type' => 'post', 'posts_per_page' => 4);
+                    $featured = new WP_Query($args);
+                    if ( $featured->have_posts() ) :
+                    
+                        while ( $featured->have_posts() ) : $featured->the_post();
+                    ?>
+                            <!-- Single Item -->
+                             <div class="col-lg-4 single-item">
                         <div class="item">
                             <div class="thumb">
-                                <a href="blog-single.php"
-                                ><img src="assets/img/blog/1.webp" alt="Thumb"
+                                <a href="<?php echo get_permalink($featured->ID); ?>"
+                                ><img src="<?php echo get_the_post_thumbnail_url($featured->ID); ?>" alt="Thumb"
                                     /></a>
                                 <div class="date">
-                                    <h4><span>24</span> Nov, 2025</h4>
+                                    <h4>
+                                        <span><?php echo get_the_date('d'); ?></span>
+                                        <?php echo get_the_date('M, Y'); ?>
+                                    </h4>
                                 </div>
                             </div>
                             <div class="info">
-                                <h4>
-                                    <a href="blog-single.php">The Rise of Professional Movers in Kenya</a>
-                                </h4>
+                                <h3>
+                                    <a href="<?php echo get_permalink($featured->ID); ?>"
+                                    ><?php echo get_the_title(); ?></a>
+                                </h3>
                                 <p>
-                                    For years, moving has been seen as casual work, the kind of
-                                    job one takes up to “fill the gap” before something better
-                                    comes along. Yet behind every successful relocation is a
-                                    skillset that demands precision, care, and trust. From
-                                    planning logistics and safeguarding fragile belongings to
-                                    ensuring smooth handovers across borders, professional moving
-                                    is far from simple labour. It’s a trade — and one that is
-                                    evolving fast.
+                                    <?php the_excerpt(); ?>
                                 </p>
-                                <a href="blog-single.php"
+                                <a href="<?php echo get_permalink($featured->ID); ?>"
                                 >Read More <i class="fas fa-angle-double-right"></i
                                     ></a>
-                                <!-- <div class="meta">
-                                  <ul>
-                                    <li>
-                                      <a href="#"><i class="fas fa-user"></i> Sam Mwaura</a>
-                                    </li>
-                                    <li>
-                                      <a href="#"><i class="fas fa-comments"></i> 23 Comments</a>
-                                    </li>
-                                  </ul>
-                                </div> -->
                             </div>
                         </div>
-                    </div>
-                    <!-- Single Item -->
-                    <!-- Single Item -->
-                    <div class="col-lg-4 single-item">
-                        <div class="item">
-                            <div class="thumb">
-                                <a href="blog-single.php"
-                                ><img src="assets/img/blog/2.webp" alt="Thumb"
-                                    /></a>
-                                <div class="date">
-                                    <h4><span>12</span> Nov, 2035</h4>
-                                </div>
-                            </div>
-                            <div class="info">
-                                <h4>
-                                    <a href="blog-single.php">Why Skills Training Matters: Building Dignity and
-                                        Opportunity in Hands-On Careers</a>
-                                </h4>
-                                <p>
-                                    In a world that often glorifies white-collar jobs, it’s easy
-                                    to overlook the power of skilled hands. Yet, across Kenya,
-                                    millions of livelihoods depend on craftsmanship, precision,
-                                    and physical work; the kind that keeps homes safe, companies
-                                    running, and communities moving forward.
-                                </p>
-                                <a href="blog-single.php"
-                                >Read More <i class="fas fa-angle-double-right"></i
-                                    ></a>
-                                <!-- <div class="meta">
-                                  <ul>
-                                    <li>
-                                      <a href="#"><i class="fas fa-user"></i> Sam Mwaura</a>
-                                    </li>
-                                    <li>
-                                      <a href="#"><i class="fas fa-comments"></i> 23 Comments</a>
-                                    </li>
-                                  </ul>
-                                </div> -->
-                            </div>
                         </div>
-                    </div>
-                    <!-- Single Item -->
-                    <!-- Single Item -->
-                    <div class="col-lg-4 single-item">
-                        <div class="item">
-                            <div class="thumb">
-                                <a href="#"><img src="assets/img/blog/3.webp" alt="Thumb" /></a>
-                                <div class="date">
-                                    <h4><span>29</span> Nov, 2025</h4>
-                                </div>
-                            </div>
-                            <div class="info">
-                                <h4>
-                                    <a href="blog-single.php">Inside the World of Moving: What It Takes to Be a Certified
-                                        Professional Mover</a>
-                                </h4>
-                                <p>
-                                    Every move tells a story of new beginnings, new spaces, and
-                                    new opportunities. But behind every seamless relocation is a
-                                    team of professionals whose expertise turns chaos into calm.
-                                    They plan, lift, pack, secure, transport, and deliver with
-                                    precision and care that only comes from proper training.
-                                </p>
-                                <a href="blog-single.php"
-                                >Read More <i class="fas fa-angle-double-right"></i
-                                    ></a>
-                                <!-- <div class="meta">
-                                  <ul>
-                                    <li>
-                                      <a href="#"><i class="fas fa-user"></i> Sam Mwaura</a>
-                                    </li>
-                                    <li>
-                                      <a href="#"><i class="fas fa-comments"></i> 23 Comments</a>
-                                    </li>
-                                  </ul>
-                                </div> -->
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Single Item -->
+                            <!-- Single Item -->
+                    <?php
+                        endwhile; wp_reset_postdata();
+                    endif;
+                    ?>
                 </div>
             </div>
         </div>
@@ -1033,23 +770,31 @@ get_header();
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 info">
-                    <h4>Our Trusted Partners</h4>
+                    <h4><?php echo get_field('section_title'); ?></h4>
                     <p>
-                        We collaborate with organizations that share our commitment to innovation and growth. Together, we strive to create meaningful opportunities and deliver exceptional value across every initiative.
-                    </p>
+                        <?php echo get_field('section_description'); ?>
+                       </p>
                 </div>
                 <div class="col-lg-8 clients">
                     <div class="clients-items owl-carousel owl-theme text-center">
-                        <div class="single-item">
-                            <a href="#"><img src="assets/img/clients/1.webp" alt="Clients"></a>
-                        </div>
-                        <div class="single-item">
-                            <a href="#"><img src="assets/img/clients/2.webp" alt="Clients"></a>
-                        </div>
-                        <div class="single-item">
-                            <a href="#"><img src="assets/img/clients/3.webp" alt="Clients"></a>
-                        </div>
 
+                        <?php
+                        $images = get_field('partnerlogos');
+                        $size = 'full'; // (thumbnail, medium, large, full or custom size)
+                        if( $images ): ?>
+                        
+                                <?php foreach( $images as $image ): ?>
+                                  
+                                    <div class="single-item">
+                                        <a href="#">
+                                           
+                                            <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" />
+                                        </a>
+                                    </div>
+                                <?php endforeach; ?>
+                        
+                        <?php endif; ?>
+                        
                     </div>
                 </div>
             </div>

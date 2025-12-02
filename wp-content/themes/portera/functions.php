@@ -96,6 +96,7 @@ function portera_setup() {
 		array(
 			'height'      => 80,
 			'width'       => 215,
+            
 			'flex-width'  => true,
 			'flex-height' => true,
 		)
@@ -149,7 +150,7 @@ add_action( 'widgets_init', 'portera_widgets_init' );
 function portera_scripts(): void
 {
 	wp_enqueue_style( 'portera-bootstrap', get_theme_file_uri('assets/css/bootstrap.min.css'), array(), _S_VERSION );
-    wp_enqueue_style( 'portera-awesome', get_theme_file_uri('assets/css/font-awesome.min.cs'), array(), _S_VERSION );
+    wp_enqueue_style( 'portera-awesome', get_theme_file_uri('assets/css/font-awesome.min.css'), array(), _S_VERSION );
     wp_enqueue_style( 'portera-flaticon', get_theme_file_uri('assets/css/flaticon-set.css'), array(), _S_VERSION );
     wp_enqueue_style( 'portera-elegant', get_theme_file_uri('assets/css/elegant-icons.css'), array(), _S_VERSION );
     wp_enqueue_style( 'portera-popup', get_theme_file_uri('assets/css/magnific-popup.css'), array(), _S_VERSION );
@@ -165,7 +166,7 @@ function portera_scripts(): void
     wp_enqueue_script( 'jquery', 'https://code.jquery.com/jquery-3.6.0.min.js', array(), _S_VERSION, true );
     wp_enqueue_script( 'popperjs', 'https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js', array(), _S_VERSION, true );
     wp_enqueue_script( 'bootjs', 'https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js', array(), _S_VERSION, true );
-    wp_enqueue_script( 'stackpath', 'https://stackpath.bootstrapcdn.com/bootstrap/4.6.2/js/bootstrap.min.js', array(), _S_VERSION, true );
+   // wp_enqueue_script( 'stackpath', 'https://stackpath.bootstrapcdn.com/bootstrap/4.6.2/js/bootstrap.min.js', array(), _S_VERSION, true );
 
     wp_enqueue_script( 'portera-jquery', get_theme_file_uri('assets/js/jquery-3.7.1.min.js'), array(), _S_VERSION, true );
     wp_enqueue_script( 'portera-navigation', get_theme_file_uri('assets/js/bootstrap.bundle.min.js'), array(), _S_VERSION, true );

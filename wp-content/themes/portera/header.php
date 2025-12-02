@@ -20,10 +20,8 @@
     <meta name="description" content="Portera - Mobility Training Institute" />
     <meta name="robots" content="noindex, nofollow" />
 
-    <!-- ========== Page Title ========== -->
-    <title>Portera - Mobility Training Institute</title>
+  
     <?php wp_head(); ?>
-    <!-- ========== Favicon Icon ========== -->
     <link
             rel="shortcut icon"
             href="assets/img/favicon.png"
@@ -151,9 +149,13 @@
 
             <div class="navbar-brand-left">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="index.php">
-                    
-                        <?php  the_custom_logo(); ?>
+                    <a class="navbar-brand" href="<?php echo home_url(); ?>">
+
+                        <?php
+                        $custom_logo_id = get_theme_mod( 'custom_logo' );
+                        $custom_logo_url = wp_get_attachment_image_url( $custom_logo_id , 'full' );
+                        echo '<img src="' . esc_url( $custom_logo_url ) . '" alt="">';
+                        ?>
                     </a>
                 </div>
             </div>
