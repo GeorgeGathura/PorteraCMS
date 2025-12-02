@@ -20,16 +20,16 @@
 
 // ** Database settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define( 'DB_NAME', 'portera' );
+define( 'DB_NAME', 'database_name_here' );
 
 /** Database username */
-define( 'DB_USER', '' );
+define( 'DB_USER', 'username_here' );
 
 /** Database password */
-define( 'DB_PASSWORD', '' );
+define( 'DB_PASSWORD', 'password_here' );
 
 /** Database hostname */
-define( 'DB_HOST', '' );
+define( 'DB_HOST', 'localhost' );
 
 /** Database charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8mb4' );
@@ -48,14 +48,14 @@ define( 'DB_COLLATE', '' );
  *
  * @since 2.6.0
  */
-define( 'AUTH_KEY',         '$dDjgicj@sMYb3;T%~TImo5b|.rg:(q3))?ltG+:=&cQr%&e);WE,cJ},V%=*f^i' );
-define( 'SECURE_AUTH_KEY',  'F<c(2FJH!e$<|OVuZ@wS6a9W0ih:do`a_cvBpUc.f%ClwcFZC  m?(}Sm&L0-^Tu' );
-define( 'LOGGED_IN_KEY',    '23;+mhXNXUE}NjcF0LgUqV  IytX.xMgu6D-XNfUI@pOGQzZ/U,i[h/w:OdM( XY' );
-define( 'NONCE_KEY',        '+ONs+/[v6c:yxx)(~>S-5SKW4)>II@/n;{=CKqr9A@AwvBx,}bVU}$yGcB.0}X o' );
-define( 'AUTH_SALT',        'g|U>D<xhq{oTT=@XDYHk6!}`}N$-^b(Q^MY=pYK>DHf%*t0j!C+;S:mF/6_5#l*`' );
-define( 'SECURE_AUTH_SALT', 'bRc?G8y>taYdB5UE!c!QY8i8~UjpHJ:I.hF6=K=htyH9qmMnlfk&DeQS/SV#SRF&' );
-define( 'LOGGED_IN_SALT',   '^R)Be^6-d.9QLH_ySaEr`?^_1?#Is+`89GDveBm:<z;/0M<>p$2fBfM{.nUoq0%$' );
-define( 'NONCE_SALT',       'nRA?LfMZR@cedh((;9I(FZ3p1rz)hGTIk:DE?H=<C%/(XNef%9W8^-7mnGap==($' );
+define( 'AUTH_KEY',         'put your unique phrase here' );
+define( 'SECURE_AUTH_KEY',  'put your unique phrase here' );
+define( 'LOGGED_IN_KEY',    'put your unique phrase here' );
+define( 'NONCE_KEY',        'put your unique phrase here' );
+define( 'AUTH_SALT',        'put your unique phrase here' );
+define( 'SECURE_AUTH_SALT', 'put your unique phrase here' );
+define( 'LOGGED_IN_SALT',   'put your unique phrase here' );
+define( 'NONCE_SALT',       'put your unique phrase here' );
 
 /**#@-*/
 
@@ -71,7 +71,7 @@ define( 'NONCE_SALT',       'nRA?LfMZR@cedh((;9I(FZ3p1rz)hGTIk:DE?H=<C%/(XNef%9W
  *
  * @link https://developer.wordpress.org/advanced-administration/wordpress/wp-config/#table-prefix
  */
-$table_prefix = 'mtip_';
+$table_prefix = 'wp_';
 
 /**
  * For developers: WordPress debugging mode.
@@ -95,7 +95,7 @@ define( 'WP_DEBUG', false );
 
 /** Absolute path to the WordPress directory. */
 if ( ! defined( 'ABSPATH' ) ) {
-    define( 'ABSPATH', __DIR__ . '/' );
+	define( 'ABSPATH', __DIR__ . '/' );
 }
 
 /** Sets up WordPress vars and included files. */
