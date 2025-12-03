@@ -37,7 +37,13 @@ $featuredImage = get_the_post_thumbnail_url($post->ID);
                     <div class="blog-content col-lg-8">
                         <?php
 
-                        $args = array('post_type' => 'post', 'posts_per_page' => 4);
+                        // Proper pagination for page templates
+                        $paged = get_query_var('paged') ? (int) get_query_var('paged') : ( get_query_var('page') ? (int) get_query_var('page') : 1 );
+                        $args = array(
+                            'post_type'      => 'post',
+                            'posts_per_page' => 4,
+                            'paged'          => $paged,
+                        );
                         $featured = new WP_Query($args);
                         if ( $featured->have_posts() ) :
 
@@ -83,34 +89,39 @@ $featuredImage = get_the_post_thumbnail_url($post->ID);
                         <!-- Pagination -->
                         <div class="row">
                             <div class="col-lg-12 pagi-area">
-                                <nav aria-label="navigation">
-                                    <ul class="pagination">
-                                        <li><a href="#">Previous</a></li>
-                                        <li class="active"><a href="#">1</a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">Next</a></li>
-                                    </ul>
-                                </nav>
+                                <?php
+                                // Build pagination based on the custom query
+                                $big = 999999999; // need an unlikely integer
+                                $pagination_links = paginate_links( array(
+                                    'base'      => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+                                    'format'    => '?paged=%#%',
+                                    'current'   => max( 1, $paged ),
+                                    'total'     => (int) $featured->max_num_pages,
+                                    'prev_text' => 'Previous',
+                                    'next_text' => 'Next',
+                                    'type'      => 'array',
+                                ) );
+
+                                if ( ! empty( $pagination_links ) ) : ?>
+                                    <nav aria-label="navigation">
+                                        <ul class="pagination">
+                                            <?php foreach ( $pagination_links as $link ) :
+                                                // Detect current page item and map classes
+                                                $is_current = strpos( $link, 'class="page-numbers current"' ) !== false;
+                                                // Strip default list wrappers if any and keep anchor/span HTML
+                                                // Output with theme-friendly classes
+                                            ?>
+                                                <li<?php echo $is_current ? ' class="active"' : ''; ?>><?php echo $link; ?></li>
+                                            <?php endforeach; ?>
+                                        </ul>
+                                    </nav>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
                     <!-- Start Sidebar -->
                     <div class="sidebar col-lg-4">
                         <aside>
-                            <!-- Start Sidebar Item -->
-                            <div class="sidebar-item search">
-                                <div class="title">
-                                    <h4>Search</h4>
-                                </div>
-                                <div class="sidebar-info">
-                                    <form>
-                                        <input type="text" class="form-control" />
-                                        <input type="submit" value="search" />
-                                    </form>
-                                </div>
-                            </div>
-                            <!-- End Sidebar Item -->
 
                             <!-- Start Sidebar Item -->
                             <div class="sidebar-item category">
@@ -118,17 +129,28 @@ $featuredImage = get_the_post_thumbnail_url($post->ID);
                                     <h4>Category</h4>
                                 </div>
                                 <div class="sidebar-info">
+                                    <?php
+                                            $categories = get_categories( array(
+                                                'orderby' => 'name',
+                                                'order'   => 'ASC'
+                                            ) );
+                                            
+                                            if($categories):
+                                            ?>
                                     <ul>
+                                        <?php
+                                                foreach( $categories as $category ):
+                                        ?>
                                         <li>
-                                            <a href="#">Business Management <span>12</span></a>
+                                            <a href="<?php echo esc_url( get_category_link( $category->term_id ) ); ?>">
+                                                <?php echo $category->name; ?> <span><?php echo sizeof($categories); ?></span>
+                                            </a>
                                         </li>
-                                        <li>
-                                            <a href="#">Online Learning <span>17</span></a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Course Management <span>0</span></a>
-                                        </li>
+                                        <?php endforeach; ?>
                                     </ul>
+                                            <?php else: ?>
+                                            <strong>No Categories Found</strong>
+                                            <?php endif; ?>
                                 </div>
                             </div>
                             <!-- End Sidebar Item -->
@@ -138,64 +160,43 @@ $featuredImage = get_the_post_thumbnail_url($post->ID);
                                 <div class="title">
                                     <h4>Recent Posts</h4>
                                 </div>
+                                <?php
+                                $notPaged = get_query_var( 'paged' ) >1 ? get_query_var( 'paged' )-1 : 2 ;
+                                $args = array('post_type' => 'post', 'posts_per_page' => 4, 'paged' => $notPaged);
+                                $featured = new WP_Query($args);
+                                if ( $featured->have_posts() ) :
+                                
+                                    while ( $featured->have_posts() ) : $featured->the_post();
+                                ?>
+                                <div class="item">
+                                    <div class="content">
+                                        <div class="thumb">
+                                            <a href="<?php echo get_permalink($featured->ID); ?>"
+                                            >
+                                                <img src="<?php echo get_the_post_thumbnail_url($featured->ID); ?>" alt="Thumb"
+                                                /></a>
+                                        </div>
+                                        <div class="info">
+                                            <h4>
+                                                <a href="<?php echo get_permalink($featured->ID); ?>"
+                                                ><?php echo get_the_title(); ?></a>
+                                            </h4>
+                                            <div class="meta">
+                                                <i class="fas fa-user"></i> By <a href="#">Sam Mwaura</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                                <?php
+                                    endwhile; wp_reset_postdata();
 
-                                <div class="item">
-                                    <div class="content">
-                                        <div class="thumb">
-                                            <a href="#">
-                                                <img src="assets/img/blog/1.webp" alt="Thumb" />
-                                            </a>
-                                        </div>
-                                        <div class="info">
-                                            <h4>
-                                                <a href="#">The Rise of Professional Movers in Kenya</a>
-                                            </h4>
-                                            <div class="meta">
-                                                <i class="fas fa-user"></i> By <a href="#">Sam Mwaura</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="content">
-                                        <div class="thumb">
-                                            <a href="#">
-                                                <img src="assets/img/blog/2.webp" alt="Thumb" />
-                                            </a>
-                                        </div>
-                                        <div class="info">
-                                            <h4>
-                                                <a href="#"
-                                                >Why Skills Training Matters: Building Dignity and
-                                                    Opportunity in Hands-On Careers</a
-                                                >
-                                            </h4>
-                                            <div class="meta">
-                                                <i class="fas fa-user"></i> By <a href="#">Sam Mwaura</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="content">
-                                        <div class="thumb">
-                                            <a href="#">
-                                                <img src="assets/img/blog/3.webp" alt="Thumb" />
-                                            </a>
-                                        </div>
-                                        <div class="info">
-                                            <h4>
-                                                <a href="#"
-                                                >Inside the World of Moving: What It Takes to Be a
-                                                    Certified Professional Mover</a
-                                                >
-                                            </h4>
-                                            <div class="meta">
-                                                <i class="fas fa-user"></i> By <a href="#">Sam Mwaura</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                else:
+                                    ?>
+                                    <strong>No Recent Posts Found</strong>
+                                <?php
+                                endif;
+                                ?>
                             </div>
                             <!-- End Sidebar Item -->
 
@@ -207,12 +208,20 @@ $featuredImage = get_the_post_thumbnail_url($post->ID);
                                     <h4>Archives</h4>
                                 </div>
                                 <div class="sidebar-info">
-                                    <ul>
-                                        <li><a href="#">Aug 2025</a></li>
-                                        <li><a href="#">Sept 2025</a></li>
-                                        <li><a href="#">Nov 2025</a></li>
-                                        <li><a href="#">Dec 2025</a></li>
-                                    </ul>
+                                    <?php
+                                    $args = array(
+                                            'type'            => 'monthly',
+                                            'limit'           => '',
+                                            'format'          => 'html',
+                                            'before'          => '',
+                                            'after'           => '',
+                                            'show_post_count' => false,
+                                            'echo'            => 1,
+                                            'order'           => 'DESC'
+                                    );
+                                    wp_get_archives( $args );
+                                    ?>
+                                   
                                 </div>
                             </div>
                             <!-- End Sidebar Item -->
@@ -226,32 +235,32 @@ $featuredImage = get_the_post_thumbnail_url($post->ID);
                                     <ul>
                                         <li>
                                             <a href="#">
-                                                <img src="assets/img/advisor.webp" alt="thumb" />
+                                                <img src="<?php echo get_theme_file_uri('assets/img/advisor.webp'); ?>" alt="thumb" />
                                             </a>
                                         </li>
                                         <li>
                                             <a href="#">
-                                                <img src="assets/img/about.webp" alt="thumb" />
+                                                <img src="<?php echo get_theme_file_uri('assets/img/about.webp'); ?>" alt="thumb" />
                                             </a>
                                         </li>
                                         <li>
                                             <a href="#">
-                                                <img src="assets/img/about2.webp" alt="thumb" />
+                                                <img src="<?php echo get_theme_file_uri('assets/img/about2.webp'); ?>" alt="thumb" />
                                             </a>
                                         </li>
                                         <li>
                                             <a href="#">
-                                                <img src="assets/img/banner/movers2.webp" alt="thumb" />
+                                                <img src="<?php echo get_theme_file_uri('assets/img/banner/movers2.webp'); ?>" alt="thumb" />
                                             </a>
                                         </li>
                                         <li>
                                             <a href="#">
-                                                <img src="assets/img/advisor.webp" alt="thumb" />
+                                                <img src="<?php echo get_theme_file_uri('assets/img/advisor.webp'); ?>" alt="thumb" />
                                             </a>
                                         </li>
                                         <li>
                                             <a href="#">
-                                                <img src="assets/img/advisor.webp" alt="thumb" />
+                                                <img src="<?php echo get_theme_file_uri('assets/img/advisor.webp'); ?>" alt="thumb" />
                                             </a>
                                         </li>
                                     </ul>
@@ -259,62 +268,6 @@ $featuredImage = get_the_post_thumbnail_url($post->ID);
                             </div>
                             <!-- End Sidebar Item -->
 
-                            <!-- Start Sidebar Item -->
-                            <div class="sidebar-item social-sidebar">
-                                <div class="title">
-                                    <h4>follow us</h4>
-                                </div>
-                                <div class="sidebar-info">
-                                    <ul>
-                                        <li class="facebook">
-                                            <a href="#">
-                                                <i class="fab fa-facebook-f"></i>
-                                            </a>
-                                        </li>
-                                        <li class="twitter">
-                                            <a href="#">
-                                                <i class="fab fa-twitter"></i>
-                                            </a>
-                                        </li>
-                                        <li class="pinterest">
-                                            <a href="#">
-                                                <i class="fab fa-pinterest"></i>
-                                            </a>
-                                        </li>
-                                        <li class="g-plus">
-                                            <a href="#">
-                                                <i class="fab fa-google-plus-g"></i>
-                                            </a>
-                                        </li>
-                                        <li class="linkedin">
-                                            <a href="#">
-                                                <i class="fab fa-linkedin-in"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- End Sidebar Item -->
-
-                            <!-- Start Sidebar Item -->
-                            <div class="sidebar-item tags">
-                                <div class="title">
-                                    <h4>tags</h4>
-                                </div>
-                                <div class="sidebar-info">
-                                    <ul>
-                                        <li><a href="#">Fashion</a></li>
-                                        <li><a href="#">Education</a></li>
-                                        <li><a href="#">nation</a></li>
-                                        <li><a href="#">study</a></li>
-                                        <li><a href="#">health</a></li>
-                                        <li><a href="#">food</a></li>
-                                        <li><a href="#">travel</a></li>
-                                        <li><a href="#">science</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- End Sidebar Item -->
                         </aside>
                     </div>
                     <!-- End Start Sidebar -->

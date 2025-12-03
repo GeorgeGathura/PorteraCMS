@@ -8,7 +8,8 @@
  */
 
 get_header();
-$featuredImage = get_the_post_thumbnail_url()
+$featuredImage = get_the_post_thumbnail_url();
+$category = get_the_category() ?? 'Uncategorized';
 ?>
     <!-- Start Breadcrumb -->
     <div
@@ -23,10 +24,10 @@ $featuredImage = get_the_post_thumbnail_url()
                         <li>
                             <a href="<?php echo home_url(); ?>"><i class="fas fa-home"></i> Home</a>
                         </li>
-                        <li><a href="#">Blog</a></li>
-                        <?php
-                        the_title('<li class="active">','<li>');
-                        ?>
+                        <li><a href="<?php echo get_permalink( 32); ?>">Blog</a></li>
+                        <li>
+                            <a href="#"><?php echo $category[0]->name ?? $category ?? 'Uncategorized'; ?></a>
+                        
                     </ul>
                 </div>
             </div>
