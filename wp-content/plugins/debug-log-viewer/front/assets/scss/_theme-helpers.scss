@@ -1,0 +1,75 @@
+// =============================================================================
+// THEME HELPER MIXINS AND UTILITIES
+// =============================================================================
+
+// Mixin to easily switch between light and dark themes
+@mixin theme-styles($theme-map) {
+  // Background colors
+  --body-bg: #{map-get($theme-map, body-bg)};
+  --content-bg: #{map-get($theme-map, content-bg)};
+  --card-bg: #{map-get($theme-map, card-bg)};
+  --table-bg: #{map-get($theme-map, table-bg)};
+  --hover-bg: #{map-get($theme-map, hover-bg)};
+  
+  // Text colors
+  --text-primary: #{map-get($theme-map, text-primary)};
+  --text-secondary: #{map-get($theme-map, text-secondary)};
+  --text-muted: #{map-get($theme-map, text-muted)};
+  --text-dark: #{map-get($theme-map, text-dark)};
+  --text-medium: #{map-get($theme-map, text-medium)};
+  --text-light: #{map-get($theme-map, text-light)};
+  --text-code: #{map-get($theme-map, text-code)};
+  
+  // Border colors
+  --border-primary: #{map-get($theme-map, border-primary)};
+  --border-light: #{map-get($theme-map, border-light)};
+  --border-accent: #{map-get($theme-map, border-accent)};
+  
+  // WordPress admin colors
+  --wp-admin-text: #{map-get($theme-map, wp-admin-text)};
+  --wp-admin-link: #{map-get($theme-map, wp-admin-link)};
+  
+  // Special colors
+  --light-blue: #{map-get($theme-map, light-blue)};
+  --light-blue-bg: #{map-get($theme-map, light-blue-bg)};
+  --code-bg: #{map-get($theme-map, code-bg)};
+}
+
+// Dark theme class
+.debug-log-viewer-dark-theme,
+#wpbody-content.debug-log-viewer-dark-theme {
+  @include theme-styles($dark-theme);
+  
+  // Additional dark theme specific styles
+  .pro-badge {
+    box-shadow: 0 1px 2px rgba(255, 255, 255, 0.1);
+  }
+  
+  .review-card:hover {
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+  }
+  
+  // Adjust shadows for dark theme
+  .settings-group,
+  .alerts {
+    box-shadow: 0 .125rem .25rem rgba(255, 255, 255, 0.075);
+  }
+}
+
+// Initialize light theme as default using CSS custom properties
+:root {
+  @include theme-styles($light-theme);
+}
+
+// Media query for automatic dark theme detection
+@media (prefers-color-scheme: dark) {
+  :root:not(.debug-log-viewer-force-light) {
+    @include theme-styles($dark-theme);
+  }
+}
+
+// Force light theme class (for user preference override)
+.debug-log-viewer-force-light,
+#wpbody-content.debug-log-viewer-force-light {
+  @include theme-styles($light-theme);
+}
