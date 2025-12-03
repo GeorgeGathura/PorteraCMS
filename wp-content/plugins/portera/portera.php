@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                 array(
                     'labels'      => array(
                         'name'          => __('Trainers', 'portera-basic'),
-                        'singular_name' => __('Trainers', 'portera-basic'),
+                        'singular_name' => __('Trainer', 'portera-basic'),
                     ),
                     'public'      => false,
                     'has_archive' => true,
@@ -31,7 +31,20 @@ if ( ! defined( 'ABSPATH' ) ) {
             );
             
         }
-
+        function portera_setupEvents(): void
+        {
+            register_post_type('events',
+                array(
+                    'labels'      => array(
+                        'name'          => __('Events', 'portera-basic'),
+                        'singular_name' => __('Event', 'portera-basic'),
+                    ),
+                    'public'      => false,
+                    'has_archive' => true,
+                )
+            );
+        
+        }
 
         /**
          * Register the "trainer" custom post type
@@ -39,6 +52,7 @@ if ( ! defined( 'ABSPATH' ) ) {
         function portera_setup()
         {
             portera_setupTrainers();
+            portera_setupEvents();
         }
 
 
@@ -55,140 +69,46 @@ if ( ! defined( 'ABSPATH' ) ) {
 
         function portera_render_trainers($atts = [], $content = null)
         {
-            return '
-<section id="advisor" class="advisor-area default-padding bottom-less">
-  <div class="container">
-    <div class="advisor-items text-center text-light">
-      <div class="row">
-        <!-- Single Item -->
-        <div class="col-lg-4 col-md-6 single-item">
-          <div class="advisor-item">
-            <div class="info-box">
-              <img src="assets/img/advisor/1.webp" alt="Thumb" />
-              <div class="info-title">
-                <h4>Joseph Ndung’u</h4>
-                <span>Documentation & Records Management</span>
-                <div class="social">
-                  <p>
-                    Mr. Ndungu teaches students how to prepare, manage, and
-                    maintain moving and relocation documents. The sessions focus
-                    on inventory management, labeling, customs forms, and the
-                    importance of accuracy and traceability in professional
-                    moving operations.
-                  </p>
+            $content='<section id="advisor" class="advisor-area default-padding bottom-less">
+    <div class="container">
+        <div class="advisor-items text-center text-light">
+            <div class="row">';
+        
+
+        $args = array('post_type' => 'trainers', 'posts_per_page' => 4);
+        $featured = new WP_Query($args);
+        if ( $featured->have_posts() ) :
+        
+            while ( $featured->have_posts() ) : $featured->the_post();
+                $featuredImage = get_the_post_thumbnail_url(get_the_ID(), 'full');
+        
+         
+               $content.='
+                <div class="col-lg-4 col-md-6 single-item">
+                    <div class="advisor-item">
+                        <div class="info-box">
+                            <img src="<?php echo $featuredImage; ?>" alt="Thumb" />
+                            <div class="info-title">';
+               $content. = '<h4>'.get_the_title().'</h4>'; 
+               $content.='
+                                <span>'.get_field('role').'</span>
+                                <div class="social">';
+               $content.= get_the_content();
+
+               $content.='                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>';
+            
+             endwhile; wp_reset_postdata();
+        endif;
+         $content.='
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 single-item">
-          <div class="advisor-item">
-            <div class="info-box">
-              <img src="assets/img/advisor/3.webp" alt="Thumb" />
-              <div class="info-title">
-                <h4>Cecilia Karanja</h4>
-                <span>Packing & Handling Techniques</span>
-                <div class="social">
-                  <p>
-                    Mrs. Karanjas course covers professional packing standards,
-                    material selection, and handling of delicate, high-value
-                    items. She trains students on wrapping methods, packing for
-            export and local moves, and load arrangement for safety and
-                                                             efficiency.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 single-item">
-          <div class="advisor-item">
-            <div class="info-box">
-              <img src="assets/img/advisor/2.webp" alt="Thumb" />
-              <div class="info-title">
-                <h4>Elizabeth Nabiswa</h4>
-                <span>Client Communication & Service Etiquette</span>
-                <div class="social">
-                  <p>
-        Mrs. Nabiswas course focuses on building interpersonal and
-                    customer service skills. Her module trains students on
-                    communication etiquette, conflict management, teamwork, and
-                    maintaining professionalism at every stage of client
-                    interaction.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Single Item -->
-        <!-- Single Item -->
-        <div class="col-lg-4 col-md-6 single-item">
-          <div class="advisor-item">
-            <div class="info-box">
-              <img src="assets/img/advisor/4.webp" alt="Thumb" />
-              <div class="info-title">
-                <h4>Junias Kimani</h4>
-                <span>Housekeeping for Movers</span>
-                <div class="social">
-                  <p>
-                    Mr. Kimanis lessons emphasize designing, organizing, and
-                    maintaining neat, client-ready environments before and after
-                    move-ins. Students learn attention to detail, use of
-                    cleaning materials, and how to align with client
-                    expectations during setups.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-    
-       <div class="col-lg-4 col-md-6 single-item">
-          <div class="advisor-item">
-            <div class="info-box">
-              <img src="assets/img/advisor/4.webp" alt="Thumb" />
-              <div class="info-title">
-                <h4>Charles Lumumba</h4>
-                <span>Housekeeping for Movers</span>
-                <div class="social">
-                  <p>
-        Mr. Lumumbas lessons emphasize designing, organizing, and
-                    maintaining neat, client-ready environments before and after
-                    move-ins. Students learn attention to detail, use of
-                    cleaning materials, and how to align with client
-                    expectations during setups.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 single-item">
-          <div class="advisor-item">
-            <div class="info-box">
-              <img src="assets/img/advisor/5.webp" alt="Thumb" />
-              <div class="info-title">
-                <h4>Sam Mwaura</h4>
-                <span>Safety in Moving & Introduction to Moving Industry</span>
-                <div class="social">
-                  <p>
-                    Mr. Mwaura introduces students to the fundamentals of the
-                    moving industry, safety protocols, and professional conduct.
-                    His sessions focus on lifting techniques, teamwork
-                    coordination, hazard awareness, and maintaining a
-                    safety-first culture on every job site.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-';
+            </section>';
+            return $content;
         }
     
     add_shortcode('trainers', 'portera_render_trainers');

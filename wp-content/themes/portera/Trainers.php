@@ -34,14 +34,14 @@ $featuredImage = get_the_post_thumbnail_url();
     <div class="container">
         <div class="advisor-items text-center text-light">
             <div class="row">
-<?php
+        <?php
 
-$args = array('post_type' => 'trainers', 'posts_per_page' => 4);
-$featured = new WP_Query($args);
-if ( $featured->have_posts() ) :
-
-    while ( $featured->have_posts() ) : $featured->the_post();
-        $featuredImage = get_the_post_thumbnail_url(get_the_ID(), 'full');
+        $args = array('post_type' => 'trainers', 'posts_per_page' => 4);
+        $featured = new WP_Query($args);
+        if ( $featured->have_posts() ) :
+        
+            while ( $featured->have_posts() ) : $featured->the_post();
+                $featuredImage = get_the_post_thumbnail_url(get_the_ID(), 'full');
         ?>
          
                 <!-- Single Item -->
@@ -57,16 +57,15 @@ if ( $featured->have_posts() ) :
                                     <?php the_content(); ?>
 
                                 </div>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            
         <?php
-    
-    endwhile; wp_reset_postdata();
-    endif;
-        ?>
+             endwhile; wp_reset_postdata();
+        endif;
+            ?>
             </div>
         </div>
     </div>
