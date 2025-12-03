@@ -27,7 +27,7 @@ $category = get_the_category() ?? 'Uncategorized';
                         <li><a href="<?php echo get_permalink( 32); ?>">Blog</a></li>
                         <li>
                             <a href="#"><?php echo $category[0]->name ?? $category ?? 'Uncategorized'; ?></a>
-                        
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -85,7 +85,7 @@ $category = get_the_category() ?? 'Uncategorized';
                                     ?>
 
                                 </div>
-                                <div class="post-pagi-area">
+                                <div class="post-pagi-area mx-0">
                                     <?php
                                     the_post_navigation(
                                             array(
@@ -99,10 +99,8 @@ $category = get_the_category() ?? 'Uncategorized';
                                 </div>
                                 <div class="post-tags">
                                     <span>Tags: </span>
-                                    <a href="#">Consulting</a>
-                                    <a href="#">Planing</a>
-                                    <a href="#">Business</a>
-                                    <a href="#">Fashion</a>
+                                    <?php the_tags('<a href="'.get_tag_link(get_the_ID()).'">','</a> <a href="'.get_tag_link(get_the_ID()).'">','</a>'); ?>
+                                  
                                 </div>
                              
                         
