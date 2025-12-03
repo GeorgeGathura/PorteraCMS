@@ -369,7 +369,7 @@ $homepageId = $post->ID;
 
     <div
         class="subscribe-area text-center text-light default-padding bg-fixed shadow dark-hard"
-        style="background-image: url(assets/img/welcome.webp)"
+        style="background-image: url(<?php echo get_theme_file_uri('assets/img/welcome.webp' ); ?>)"
     >
         <div class="container">
             <div class="row">
