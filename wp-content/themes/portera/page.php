@@ -37,7 +37,10 @@ $featuredImage = get_the_post_thumbnail_url();
         </div>
     </div>
 
-
+<?php
+do_shortcode(get_the_content());
+the_content();
+?>
     <!-- End Faq -->
 <?php
 //get_sidebar();
