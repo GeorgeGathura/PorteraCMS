@@ -52,23 +52,23 @@ $category = get_the_category() ?? 'Uncategorized';
                                 <div class="info">
                                         <div class="meta">
                                        
-                                            <div class="share">
-                                                <i class="fas fa-share-alt"></i>
-                                                <ul>
-                                                    <li class="facebook">
-                                                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                                                    </li>
-                                                    <li class="twitter">
-                                                        <a href="#"><i class="fab fa-twitter"></i></a>
-                                                    </li>
-                                                    <li class="pinterest">
-                                                        <a href="#"><i class="fab fa-pinterest"></i></a>
-                                                    </li>
-                                                    <li class="dribbble">
-                                                        <a href="#"><i class="fab fa-dribbble"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
+<!--                                            <div class="share">-->
+<!--                                                <i class="fas fa-share-alt"></i>-->
+<!--                                                <ul>-->
+<!--                                                    <li class="facebook">-->
+<!--                                                        <a href="#"><i class="fab fa-facebook-f"></i></a>-->
+<!--                                                    </li>-->
+<!--                                                    <li class="twitter">-->
+<!--                                                        <a href="#"><i class="fab fa-twitter"></i></a>-->
+<!--                                                    </li>-->
+<!--                                                    <li class="pinterest">-->
+<!--                                                        <a href="#"><i class="fab fa-pinterest"></i></a>-->
+<!--                                                    </li>-->
+<!--                                                    <li class="dribbble">-->
+<!--                                                        <a href="#"><i class="fab fa-dribbble"></i></a>-->
+<!--                                                    </li>-->
+<!--                                                </ul>-->
+<!--                                            </div>-->
                                         </div>
 
                                         <?php
