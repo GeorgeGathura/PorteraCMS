@@ -27,65 +27,51 @@
                         <p class="text-italic">
                             Employers are invited to participate in curriculum validation, field attachments, and graduate recruitment — ensuring training stays relevant and accountable.
                         </p>
-                        <div class="subscribe">
-                            <form action="#">
-                                <div class="input-group stylish-input-group">
-                                    <input type="email" placeholder="Enter your e-mail here" class="form-control" name="email" style="min-height:50px;">
-                                    <button type="submit">
-                                        <i class="fa fa-paper-plane"></i>
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
+<!--                        <div class="subscribe">-->
+<!--                            <form action="#">-->
+<!--                                <div class="input-group stylish-input-group">-->
+<!--                                    <input type="email" placeholder="Enter your e-mail here" class="form-control" name="email" style="min-height:50px;">-->
+<!--                                    <button type="submit">-->
+<!--                                        <i class="fa fa-paper-plane"></i>-->
+<!--                                    </button>-->
+<!--                                </div>-->
+<!--                            </form>-->
+<!--                        </div>-->
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-6 item">
                     <div class="f-item link">
-                        <h4>Links</h4>
+                        <h4>Useful Links</h4>
                         <ul>
                             <li>
-                                <a href="#">Courses</a>
+                                <a href="<?php echo home_url(); ?>">Home</a>
                             </li>
                             <li>
-                                <a href="#">Event</a>
+                                <a href="<?php echo get_permalink(36); ?>">About</a>
                             </li>
                             <li>
-                                <a href="#">Gallery</a>
+                                <a href="<?php echo get_permalink(32); ?>">Blog</a>
                             </li>
                             <li>
-                                <a href="#">Faqs</a>
-                            </li>
-                            <li>
-                                <a href="#">Teachers</a>
-                            </li>
-                            <li>
-                                <a href="#">Contact</a>
+                                <a href="<?php echo get_permalink(11); ?>">Contact Us</a>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-6 item">
                     <div class="f-item link">
-                        <h4>Support</h4>
+                        <h4>Course Links</h4>
                         <ul>
                             <li>
-                                <a href="#">Documentation</a>
+                                <a href="<?php echo get_permalink(65); ?>">Movers Course</a>
                             </li>
                             <li>
-                                <a href="#">Forums</a>
+                                <a href="<?php echo get_permalink(116); ?>">Our Instructors</a>
                             </li>
                             <li>
-                                <a href="#">Language Packs</a>
+                                <a href="<?php echo get_permalink(11); ?>">FAQs</a>
                             </li>
-                            <li>
-                                <a href="#">Release Status</a>
-                            </li>
-                            <li>
-                                <a href="#">LearnPress</a>
-                            </li>
-                            <li>
-                                <a href="#">Feedback</a>
-                            </li>
+                           
                         </ul>
                     </div>
                 </div>
@@ -130,7 +116,7 @@
                 <div class="col-lg-6">
                     <p>&copy; Copyright <?php echo date(
                                 "Y",
-                        ); ?>. All Rights Reserved by <a href="#">Portera</a></p>
+                        ); ?>. All Rights Reserved by <a href="<?php echo home_url(); ?>">Portera</a></p>
                 </div>
                 <div class="col-lg-6 text-end link">
                     <ul>
@@ -138,10 +124,7 @@
                             <a href="#">Terms of user</a>
                         </li>
                         <li>
-                            <a href="#">License</a>
-                        </li>
-                        <li>
-                            <a href="#">Support</a>
+                            <a href="#">Privacy Policy</a>
                         </li>
                     </ul>
                 </div>
