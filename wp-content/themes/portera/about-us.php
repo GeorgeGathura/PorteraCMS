@@ -34,10 +34,7 @@ $featuredImage = get_the_post_thumbnail_url();
             <div class="about-info">
                 <div class="row">
                     <div class="col-lg-12 col-xxl-6 thumb d-none d-lg-block">
-                        <video width="640" height="480" loop autoplay muted>
-                            <source src="<?php echo get_theme_file_uri('assets/video_preview.mp4'); ?>" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
+                       <img src="https://portera.ac.ke/wp-content/uploads/2025/12/movers.webp" alt="an employee in a warehouse placing a package in a designated area" />
                     </div>
                     <div class="col-lg-12 col-xxl-6 info">
                         <h2 class="text-dark">Building skilled movers. Raising the standard. Creating real careers.</h2>
@@ -198,7 +195,7 @@ $featuredImage = get_the_post_thumbnail_url();
 
     <!-- Partnerships Area
        ============================================= -->
-    <div class="video-area padding-xl text-center bg-fixed text-light shadow dark-hard" style="background-image: url(assets/img/about/partnerships.webp);">
+    <div class="video-area padding-xl text-center bg-fixed text-light shadow dark-hard" style="background-image: url(<?php echo get_theme_file_uri('assets/img/welcome.webp'); ?>);">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 offset-lg-2">
@@ -226,7 +223,7 @@ $featuredImage = get_the_post_thumbnail_url();
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6 thumb">
-                    <img src="<?php echo get_theme_file_uri('assets/img/values.webp'); ?>" alt="Thumb">
+                    <img src="https://portera.ac.ke/wp-content/uploads/2025/12/about3.webp" alt="Thumb">
                 </div>
                 <div class="col-lg-6 content">
                     <div class="site-heading text-left">
@@ -382,7 +379,7 @@ $featuredImage = get_the_post_thumbnail_url();
 
     <!-- Start Video Area
    ============================================= -->
-    <div class="video-area padding-xl text-center bg-fixed text-light shadow dark-hard" style="background-image: url(<?php echo get_theme_file_uri('assets/img/intro_video_thumbnail.webp'); ?>">
+    <div class="video-area padding-xl text-center bg-fixed text-light shadow dark-hard" style="background-image: url(https://portera.ac.ke/wp-content/uploads/2025/12/warehouse_worker.webp)">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 offset-lg-2">

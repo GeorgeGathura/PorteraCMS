@@ -74,6 +74,7 @@
 <!-- Header -->
 <header>
     <nav class="navbar inc-shape navbar-sticky navbar-default validnavs dark">
+        <form action="<?php echo home_url(); ?>" method="get" class="search-form">
         <!-- Start Top Search -->
         <div class="top-search">
             <div class="container-xl">
@@ -81,13 +82,14 @@
           <span class="input-group-addon"
           ><i class="fa fa-search"></i
               ></span>
-                    <input type="text" class="form-control" placeholder="Search" />
+                    <input type="text" name="s" class="form-control" placeholder="Search" />
                     <span class="input-group-addon close-search"
                     ><i class="fa fa-times"></i
                         ></span>
                 </div>
             </div>
         </div>
+        </form>
         <!-- End Top Search -->
 
         <div
@@ -108,12 +110,12 @@
                 <a href="#" class="close-side"><i class="fas fa-times"></i></a>
                 <div class="widget">
                     <div class="logo">
-<!--                            <img-->
-<!--                                    src="assets/img/logo-dark.png"-->
-<!--                                    style="height: 80px"-->
-<!--                                    alt="Logo"-->
-<!--                            />-->
-                        <?php  the_custom_logo(); ?>
+                            <img
+                                    src="<?php echo get_theme_file_uri('assets/img/logo-dark.png'); ?>"
+                                    style="height: 80px"
+                                    alt="Logo"
+                            />
+                        <?php // the_custom_logo(); ?>
                     </div>
                 </div>
                 <div class="widget">
